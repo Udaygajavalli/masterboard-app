@@ -94,7 +94,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/soft-ui-design-system/assets/css/soft-design-system.min.css"
             ],
             "scripts": []
           }
