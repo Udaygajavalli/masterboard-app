@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { YoutubeService } from 'src/app/services/youtube.service';
 
 @Component({
   selector: 'app-request-course',
@@ -10,7 +11,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./request-course.component.scss'],
 })
 export class RequestCourseComponent implements OnInit {
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private youtube: YoutubeService
+  ) {}
 
   ngOnInit(): void {}
   courseUrl!: string;
@@ -28,20 +33,26 @@ export class RequestCourseComponent implements OnInit {
       this.courseUrl.includes('youtu.be')
     ) {
       if (this.courseUrl.includes('playlist?list=')) {
-        this.id = String(
-          this.courseUrl.match(/(?<=playlist\?list=)(.*?)(?=(?:\?|$))/)![0]
-        );
-        this.getPlaylist(this.id);
+        let regex = /(?<=playlist\?list=)(.*?)(?=(?:\?|$))/g;
+        this.id = this.courseUrl.match(regex)![0];
+        this.youtube.getPlaylistItems(this.id).subscribe((data) => {
+          console.log(data);
+        });
+        this.toastr.success('Added!');
       }
     } else {
       this.toastr.error('As of now we only support YouTube Playlists.');
     }
   }
+  // res: any;
 
-  getPlaylist(id: string) {
-    let res = this.http.get(
-      `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=25&playlistId=${id}f&key=${environment.googleAPI_KEY}`
-    );
-    console.log(`Heyyy. ${res}`);
-  }
+  // getPlaylist(id: string) {
+  //   this.res = this.http.get(
+  //     `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=25&playlistId=${id.slice(
+  //       0,
+  //       -2
+  //     )}f&key=${environment.googleAPI_KEY}`
+  //   );
+  //   console.log(`Heyyy. ${this.res}`);
+  // }
 }
