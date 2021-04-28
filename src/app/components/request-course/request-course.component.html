@@ -1,0 +1,32 @@
+<div class="container">
+  <!-- (ngSubmit)="onSubmit(formData)" -->
+  <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+    <div class="row justify-content-center">
+      <!-- #formData="ngForm" (ngSubmit)="onSubmit(formData)" -->
+      <div class="form-group col-md-4 col-md-offset-5 align-center">
+        <label for="courseUrl" class="form-control-label"
+          >Enter Course URL</label
+        >
+        <input class="form-control" type="text" name="courseUrl" ngModel />
+        <button type="submit" class="btn bg-gradient-secondary m-1">
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+  <!-- {{ res | json}} -->
+</div>
+<!-- 
+<div class="col-md-4 col-md-offset-4 centered">
+  <form>
+    <div class="form-group">
+      <label for="example-text-input" class="form-control-label">Text</label>
+      <input
+        class="form-control"
+        type="text"
+        value="John Snow"
+        id="example-text-input"
+      />
+    </div>
+  </form>
+</div> -->

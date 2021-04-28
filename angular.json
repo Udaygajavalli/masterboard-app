@@ -95,7 +95,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/soft-ui-design-system/assets/css/soft-design-system.min.css"
+              "./node_modules/soft-ui-design-system/assets/css/soft-design-system.min.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
