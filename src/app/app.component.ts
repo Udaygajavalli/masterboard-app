@@ -22,7 +22,7 @@ export class AppComponent {
         this.user = user;
       },
       (err) => {
-        console.log(err);
+        this.toastr.error(err.message);
       }
     );
   }
@@ -31,10 +31,10 @@ export class AppComponent {
       .loginwithGoogle()
       .then((res) => {
         this.toastr.success("That's it. You're in!");
-        console.log('Login Sucess');
+        console.log(res);
       })
       .catch((err) => {
-        this.toastr.error('Ohhh No, Try again!');
+        this.toastr.error(err.message);
         console.log(err.message);
       });
   }
@@ -44,8 +44,8 @@ export class AppComponent {
       await this.auth.logOut();
       this.router.navigateByUrl('');
       this.toastr.info('See you again!');
-    } catch (error) {
-      this.toastr.error('Something is wrong!');
+    } catch (err) {
+      this.toastr.error(err.message);
     }
   }
 }

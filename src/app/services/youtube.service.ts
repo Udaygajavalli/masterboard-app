@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class YoutubeService {
   constructor(private http: HttpClient) {}
 
-  getPlaylistItems(id:string): Observable<any> {
+  getPlaylistItems(id: string): Observable<any> {
     return this.http.get<any>(
       `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=${id.slice(
         0,

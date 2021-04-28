@@ -11,10 +11,12 @@ import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import { RequestCourseComponent } from './components/request-course/request-course.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CardComponent } from './components/card/card.component';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
-  declarations: [AppComponent, RequestCourseComponent],
+  declarations: [AppComponent, RequestCourseComponent, CardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +25,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     BrowserAnimationsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireStorageModule,
     FormsModule,
     HttpClientModule,

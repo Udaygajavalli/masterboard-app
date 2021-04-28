@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { YoutubeService } from 'src/app/services/youtube.service';
+import { FirestoredbService } from 'src/app/services/firestoredb.service';
 
 @Component({
   selector: 'app-request-course',
@@ -14,7 +15,8 @@ export class RequestCourseComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    private youtube: YoutubeService
+    private youtube: YoutubeService,
+    private fire: FirestoredbService
   ) {}
 
   ngOnInit(): void {}
@@ -23,6 +25,7 @@ export class RequestCourseComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     this.courseUrl = f.value;
+    this.fire.createCoffeeOrder(this.courseUrl);
     this.courseUrl = JSON.stringify(this.courseUrl);
     // console.log(this.courseUrl);
 
@@ -36,7 +39,7 @@ export class RequestCourseComponent implements OnInit {
         let regex = /(?<=playlist\?list=)(.*?)(?=(?:\?|$))/g;
         this.id = this.courseUrl.match(regex)![0];
         this.youtube.getPlaylistItems(this.id).subscribe((data) => {
-          console.log(data);
+          this.fire.createCoffeeOrder(data);
         });
         this.toastr.success('Added!');
       }
