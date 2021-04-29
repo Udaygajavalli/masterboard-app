@@ -28,9 +28,17 @@
     </div>
   </form>
 </div> -->
-<ng-template #userNotLoggedIn>
-  <div class="container">
-    
-  </div>
-
+<ng-template #userNotLoggedIn> 
+  <img class="d-flex mx-auto align-center" src="\assets\img\36125-greeting-animation-for-call-to-action.gif" >
+  <li *ngIf="!user" >
+      <button
+        type="button"
+        class="btn bg-gradient-danger d-flex mx-auto  align-center"
+        (click)="loginwithGoogle()"
+      >
+        <i class="fab fa-google mr-1 centered"></i>
+        <span>Sign in</span>
+      </button>
+   
+  </li>
 </ng-template>

@@ -19,7 +19,8 @@ export class RequestCourseComponent implements OnInit {
     private toastr: ToastrService,
     private youtube: YoutubeService,
     private fire: FirestoredbService,
-    private auth: AuthService
+    private auth: AuthService,
+    
   ) {
     auth.getUser().subscribe(
       (user) => {
@@ -78,4 +79,5 @@ export class RequestCourseComponent implements OnInit {
   //   );
   //   console.log(`Heyyy. ${this.res}`);
   // }
+  
 }
