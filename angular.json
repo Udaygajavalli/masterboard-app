@@ -135,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "masterboard-app"
+  "defaultProject": "masterboard-app",
+  "cli": {
+    "analytics": "5aee49b7-8a56-4f5b-b0b3-89420927756a"
+  }
 }

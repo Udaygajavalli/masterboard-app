@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { FirestoredbService } from 'src/app/services/firestoredb.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-request-course',
@@ -12,12 +13,24 @@ import { FirestoredbService } from 'src/app/services/firestoredb.service';
   styleUrls: ['./request-course.component.scss'],
 })
 export class RequestCourseComponent implements OnInit {
+  user:any;
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
     private youtube: YoutubeService,
-    private fire: FirestoredbService
-  ) {}
+    private fire: FirestoredbService,
+    private auth: AuthService
+  ) {
+    auth.getUser().subscribe(
+      (user) => {
+        this.user = user;
+        
+      },
+      (err) => {
+        this.toastr.error(err.message);
+      }
+    );
+  }
 
   ngOnInit(): void {}
   courseUrl!: string;
@@ -39,11 +52,18 @@ export class RequestCourseComponent implements OnInit {
         let regex = /(?<=playlist\?list=)(.*?)(?=(?:\?|$))/g;
         this.id = this.courseUrl.match(regex)![0];
         this.youtube.getPlaylistItems(this.id).subscribe((data) => {
-          this.fire.createCoffeeOrder(data);
+          console.log(data);
+          
+          // this.fire.createCoffeeOrder(data);
         });
         this.toastr.success('Added!');
       }
     } else {
+      let data = {
+        "email":"guest",
+        "url": this.courseUrl
+      }
+      this.fire.courseRequests(data);
       this.toastr.error('As of now we only support YouTube Playlists.');
     }
   }

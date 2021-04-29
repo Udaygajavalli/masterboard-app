@@ -8,13 +8,17 @@ import { environment } from 'src/environments/environment';
 })
 export class YoutubeService {
   constructor(private http: HttpClient) {}
+  res: any;
 
   getPlaylistItems(id: string): Observable<any> {
-    return this.http.get<any>(
+    this.res =  this.http.get<any>(
       `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=${id.slice(
         0,
         -2
       )}&key=${environment.googleAPI_KEY}`
     );
+    
+
+    return this.res;
   }
 }
