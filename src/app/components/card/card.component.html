@@ -1,19 +1,20 @@
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-4 g-4">
   <div
     class="card-group"
     *ngFor="let item of [].constructor(100); let i = index"
   >
-    <div class="card" ngsReveal>
-      <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
-        <a href="javascript:;" class="d-block">
-          <img
-            src="https://i.ytimg.com/vi/Stj9I9_Q_6w/maxresdefault.jpg"
-            class="img-fluid border-radius-lg"
-          />
+    <div class="card card-plain" ngsReveal>
+      <div class="card-image border-radius-lg position-relative">
+        <a href="javascript:;">
+          <div class="blur-shadow-image">
+            <img
+              class="img-fluid border-radius-lg move-on-hover"
+              src="https://i.ytimg.com/vi/Stj9I9_Q_6w/maxresdefault.jpg"
+            />
+          </div>
         </a>
       </div>
-
-      <div class="card-body pt-2">
+      <div class="card-body px-0 pt-2">
         <span
           class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2"
           >House</span
