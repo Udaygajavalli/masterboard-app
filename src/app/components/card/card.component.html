@@ -1,1 +1,44 @@
-<p>card works!</p>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div
+    class="card-group"
+    *ngFor="let item of [].constructor(100); let i = index"
+  >
+    <div class="card" ngsReveal>
+      <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+        <a href="javascript:;" class="d-block">
+          <img
+            src="https://i.ytimg.com/vi/Stj9I9_Q_6w/maxresdefault.jpg"
+            class="img-fluid border-radius-lg"
+          />
+        </a>
+      </div>
+
+      <div class="card-body pt-2">
+        <span
+          class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2"
+          >House</span
+        >
+        <a href="javascript:;" class="card-title h5 d-block text-darker">
+          Shared Coworking
+        </a>
+        <p class="card-description mb-4">
+          Use border utilities to quickly style the border and border-radius of
+          an element. Great for images, buttons.
+        </p>
+        <div class="author align-items-center">
+          <img
+            src="https://i.ytimg.com/vi/Stj9I9_Q_6w/default.jpg"
+            alt="..."
+            class="avatar shadow"
+          />
+          <div class="name ps-3">
+            <span>Mathew Glock</span>
+            <div class="stats">
+              <small>Posted on 28 February</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

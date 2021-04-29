@@ -14,6 +14,7 @@ import { RequestCourseComponent } from './components/request-course/request-cour
 import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './components/card/card.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { NgsRevealModule } from 'ngx-scrollreveal';
 
 @NgModule({
   declarations: [AppComponent, RequestCourseComponent, CardComponent],
@@ -21,7 +22,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-
     BrowserAnimationsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
@@ -29,7 +29,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     AngularFireStorageModule,
     FormsModule,
     HttpClientModule,
-
+    NgsRevealModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
