@@ -1,41 +1,133 @@
 <div class="row row-cols-1 row-cols-md-4 g-4">
-  <div
-    class="card-group"
-    *ngFor="let item of [].constructor(100); let i = index"
-  >
-    <div class="card card-plain" ngsReveal>
-      <div class="card-image border-radius-lg position-relative">
-        <a href="javascript:;">
+  <div class="card-group" *ngFor="let item of [].constructor(100); let i = index">
+    <a
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModalSignUp"
+      (click)="passtoModal(i)"
+    >
+      <div class="card card-plain" ngsReveal>
+        <div class="card-image border-radius-lg position-relative">
           <div class="blur-shadow-image">
             <img
               class="img-fluid border-radius-lg move-on-hover"
               src="https://i.ytimg.com/vi/Stj9I9_Q_6w/maxresdefault.jpg"
             />
           </div>
-        </a>
+        </div>
+        <div class="card-body px-0 pt-2">
+          <span
+            class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2"
+            >{{ i }}</span
+          >
+          <p class="card-title h5 d-block text-darker">Shared Coworking</p>
+          <p class="card-description mb-4">
+            Use border utilities to quickly style the border and border-radius
+            of an element. Great for images, buttons.
+          </p>
+          <div class="author align-items-center">
+            <img
+              src="https://i.ytimg.com/vi/Stj9I9_Q_6w/default.jpg"
+              alt="..."
+              class="avatar shadow"
+            />
+            <div class="name ps-3">
+              <span>Mathew Glock</span>
+              <div class="stats">
+                <small>Posted on 28 February</small>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="card-body px-0 pt-2">
-        <span
-          class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2"
-          >House</span
-        >
-        <a href="javascript:;" class="card-title h5 d-block text-darker">
-          Shared Coworking
-        </a>
-        <p class="card-description mb-4">
-          Use border utilities to quickly style the border and border-radius of
-          an element. Great for images, buttons.
-        </p>
-        <div class="author align-items-center">
-          <img
-            src="https://i.ytimg.com/vi/Stj9I9_Q_6w/default.jpg"
-            alt="..."
-            class="avatar shadow"
-          />
-          <div class="name ps-3">
-            <span>Mathew Glock</span>
-            <div class="stats">
-              <small>Posted on 28 February</small>
+    </a>
+  </div>
+
+  <div class="col-md-4">
+    <div
+      class="modal fade"
+      id="exampleModalSignUp"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalSignTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+            <div class="card card-plain">
+              <div class="card-header pb-0 text-left">
+                <h3 class="font-weight-bolder text-primary text-gradient">
+                  Join us today {{ data }}
+                </h3>
+                <p class="mb-0">Enter your email and password to register</p>
+              </div>
+              <div class="card-body pb-3">
+                <form role="form text-left">
+                  <label>Name</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Name"
+                      aria-label="Name"
+                      aria-describedby="name-addon"
+                    />
+                  </div>
+                  <label>Email</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Email"
+                      aria-label="Email"
+                      aria-describedby="email-addon"
+                    />
+                  </div>
+                  <label>Password</label>
+                  <div class="input-group mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      aria-label="Password"
+                      aria-describedby="password-addon"
+                    />
+                  </div>
+                  <div class="form-check form-check-info text-left">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckDefault"
+                      checked=""
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      I agree the
+                      <a href="javascrpt:;" class="text-dark font-weight-bolder"
+                        >Terms and Conditions</a
+                      >
+                    </label>
+                  </div>
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0"
+                    >
+                      Sign up
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="card-footer text-center pt-0 px-sm-4 px-1">
+                <p class="mb-4 mx-auto">
+                  Already have an account?
+                  <a
+                    href="javascrpt:;"
+                    class="text-primary text-gradient font-weight-bold"
+                    >Sign in</a
+                  >
+                </p>
+              </div>
             </div>
           </div>
         </div>

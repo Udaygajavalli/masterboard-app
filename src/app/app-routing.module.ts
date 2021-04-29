@@ -8,10 +8,12 @@ import {
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
 import { CardComponent } from './components/card/card.component';
+import { BoardComponent } from './components/board/board.component';
 
 const routes: Routes = [
   { path: '', component: CardComponent },
   { path: 'requestcourse', component: RequestCourseComponent },
+  { path: 'board', component: BoardComponent },
 ];
 
 @NgModule({

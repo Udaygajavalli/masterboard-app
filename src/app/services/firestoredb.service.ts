@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class FirestoredbService {
   constructor(private firestore: AngularFirestore) {}
-  createCoffeeOrder(data: any) {
+  addYoutubeCourse(data: any) {
     this.firestore.collection('courses').add(data);
   }
   courseRequests(data: any) {

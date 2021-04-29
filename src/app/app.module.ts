@@ -15,9 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardComponent } from './components/card/card.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgsRevealModule } from 'ngx-scrollreveal';
+import { BoardComponent } from './components/board/board.component';
 
 @NgModule({
-  declarations: [AppComponent, RequestCourseComponent, CardComponent],
+  declarations: [AppComponent, RequestCourseComponent, CardComponent, BoardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

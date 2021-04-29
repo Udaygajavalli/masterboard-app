@@ -21,7 +21,7 @@ export class RequestCourseComponent implements OnInit {
     private fire: FirestoredbService,
     private auth: AuthService
   ) {
-    auth.getUser().subscribe(
+    this.auth.getUser().subscribe(
       (user) => {
         this.user = user;
         
@@ -38,10 +38,7 @@ export class RequestCourseComponent implements OnInit {
 
   onSubmit(f: NgForm) {
     this.courseUrl = f.value;
-    this.fire.createCoffeeOrder(this.courseUrl);
     this.courseUrl = JSON.stringify(this.courseUrl);
-    // console.log(this.courseUrl);
-
     console.log(f.valid);
     this.courseUrl = this.courseUrl.trim();
     if (
@@ -54,14 +51,14 @@ export class RequestCourseComponent implements OnInit {
         this.youtube.getPlaylistItems(this.id).subscribe((data) => {
           console.log(data);
           
-          // this.fire.createCoffeeOrder(data);
+          this.fire.addYoutubeCourse(data);
         });
         this.toastr.success('Added!');
       }
     } else {
       let data = {
-        "email":"guest",
-        "url": this.courseUrl
+        "email": this.user.email,
+        "url": f.value.courseUrl
       }
       this.fire.courseRequests(data);
       this.toastr.error('As of now we only support YouTube Playlists.');
