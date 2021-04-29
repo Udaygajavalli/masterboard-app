@@ -1,1 +1,14 @@
-<p>board works!</p>
+<div class="container" *ngIf="user; else userNotLoggedIn">
+  <h5>Work in progress, Come again!</h5>
+</div>
+<ng-template #userNotLoggedIn>
+  <lottie-player
+    src="https://assets3.lottiefiles.com/packages/lf20_ymbzgxgc.json"
+    background="transparent"
+    class="d-flex mx-auto align-center"
+    speed="2"
+    style="width: 600px; height: 600px"
+    loop
+    autoplay
+  ></lottie-player>
+</ng-template>

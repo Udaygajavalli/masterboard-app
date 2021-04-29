@@ -1,4 +1,4 @@
-<div class="container" *ngIf="user else userNotLoggedIn">
+<div class="container col-md-4 col-md-offset-4 centered" *ngIf="user; else userNotLoggedIn">
   <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
     <div class="row justify-content-center">
       <div class="form-group col-md-4 col-md-offset-5 align-center">
@@ -12,7 +12,6 @@
       </div>
     </div>
   </form>
-  <!-- {{ res | json}} -->
 </div>
 <!-- 
 <div class="col-md-4 col-md-offset-4 centered">
@@ -28,17 +27,14 @@
     </div>
   </form>
 </div> -->
-<ng-template #userNotLoggedIn> 
-  <img class="d-flex mx-auto align-center" src="\assets\img\36125-greeting-animation-for-call-to-action.gif" >
-  <li *ngIf="!user" >
-      <button
-        type="button"
-        class="btn bg-gradient-danger d-flex mx-auto  align-center"
-        (click)="loginwithGoogle()"
-      >
-        <i class="fab fa-google mr-1 centered"></i>
-        <span>Sign in</span>
-      </button>
-   
-  </li>
+<ng-template #userNotLoggedIn>
+    <lottie-player
+      src="https://assets3.lottiefiles.com/packages/lf20_ymbzgxgc.json"
+      background="transparent"
+      class="d-flex mx-auto align-center"
+      speed="2"
+      style="width: 600px; height: 600px"
+      loop
+      autoplay
+    ></lottie-player>
 </ng-template>

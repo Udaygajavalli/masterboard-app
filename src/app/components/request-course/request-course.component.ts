@@ -13,19 +13,20 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./request-course.component.scss'],
 })
 export class RequestCourseComponent implements OnInit {
-  user:any;
+  user: any;
   constructor(
-    private http: HttpClient,
     private toastr: ToastrService,
     private youtube: YoutubeService,
     private fire: FirestoredbService,
-    private auth: AuthService,
-    
+    private auth: AuthService
   ) {
     this.auth.getUser().subscribe(
       (user) => {
-        this.user = user;
-        
+        if (user) {
+          this.user = user;
+        } else {
+          this.toastr.warning('Please sign in to access this page.');
+        }
       },
       (err) => {
         this.toastr.error(err.message);
@@ -51,16 +52,16 @@ export class RequestCourseComponent implements OnInit {
         this.id = this.courseUrl.match(regex)![0];
         this.youtube.getPlaylistItems(this.id).subscribe((data) => {
           console.log(data);
-          
+
           this.fire.addYoutubeCourse(data);
         });
         this.toastr.success('Added!');
       }
     } else {
       let data = {
-        "email": this.user.email,
-        "url": f.value.courseUrl
-      }
+        email: this.user.email,
+        url: f.value.courseUrl,
+      };
       this.fire.courseRequests(data);
       this.toastr.error('As of now we only support YouTube Playlists.');
     }
@@ -76,5 +77,4 @@ export class RequestCourseComponent implements OnInit {
   //   );
   //   console.log(`Heyyy. ${this.res}`);
   // }
-  
 }
