@@ -33,7 +33,8 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [        "./node_modules/scrollreveal/dist/scrollreveal.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -98,7 +99,8 @@
               "./node_modules/soft-ui-design-system/assets/css/soft-design-system.min.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": []
+            "scripts": [        "./node_modules/scrollreveal/dist/scrollreveal.js"
+            ]
           }
         },
         "lint": {
