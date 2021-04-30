@@ -1,44 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
+import { finalize } from 'rxjs/operators';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
-  styleUrls: ['./create-course.component.scss']
+  styleUrls: ['./create-course.component.scss'],
 })
 export class CreateCourseComponent implements OnInit {
+  myForm: any;
+  user: any;
 
-  myForm : any;
-
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private toastr: ToastrService,
+    private storage: AngularFireStorage
+  ) {
+    this.auth.getUser().subscribe(
+      (user) => {
+        if (user) {
+          this.user = user;
+        } else {
+          this.toastr.warning('Please sign in to access this page.');
+        }
+      },
+      (err) => {
+        this.toastr.error(err.message);
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      email: '',
-      phones: this.fb.array([])
-    })
-    
+      courseName: '',
+      courseDescription: '',
+      courseAuthor: '',
+      items: this.fb.array([]),
+    });
   }
-  get phoneForms() {
-    return this.myForm.get('phones') as FormArray
+  get itemForms() {
+    return this.myForm.get('items') as FormArray;
   }
 
   addPhone() {
+    const item = this.fb.group({
+      moduleName: [],
+      moduleLink: [],
+    });
 
-    const phone = this.fb.group({ 
-      area: [],
-      prefix: [],
-      line: [],
-    })
-
-    this.phoneForms.push(phone);
+    this.itemForms.push(item);
   }
-  deletePhone(i:any) {
-    this.phoneForms.removeAt(i)
+  deletePhone(i: any) {
+    this.itemForms.removeAt(i);
   }
-
-  
-
 }

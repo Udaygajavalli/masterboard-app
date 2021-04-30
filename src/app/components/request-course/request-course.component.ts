@@ -53,7 +53,7 @@ export class RequestCourseComponent implements OnInit {
         this.youtube.getPlaylistItems(this.id).subscribe((data) => {
           console.log(data);
 
-          this.fire.addYoutubeCourse(data);
+          // this.fire.addYoutubeCourse(this.id,data);
         });
         this.toastr.success('Added!');
       }

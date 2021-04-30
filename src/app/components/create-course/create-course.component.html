@@ -1,49 +1,114 @@
-<div class="container centered">
-    <form [formGroup]="myForm">
+<div class="container col-md-8" *ngIf="user; else userNotLoggedIn">
+  Value: {{ myForm.value | json }}
+  <form [formGroup]="myForm">
+    <div class="g-1 row">
+      <div class="col-sm-10">
+        <label class="form-control-label" for="courseName"
+          >Your Course Name</label
+        >
 
-        Value: {{ myForm.value | json }}
-    
-        <hr>
-    
-    
-        <div class="form-group">
-            <label class="form-control-label" for="basic-url">Your Email ID</label>
-            <div class="input-group">
-              <span class="input-group-text" id="basic-addon3">Email</span>
-              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="email">
-            </div>
+        <input
+          type="text"
+          id="courseName"
+          class="form-control"
+          placeholder="Enter your course name"
+          formControlName="courseName"
+          required
+        />
+      </div>
+
+      <div class="col-sm-10">
+        <label class="form-control-label" for="courseDescription"
+          >Your Course Description</label
+        >
+        <textarea
+          class="form-control"
+          placeholder="Enter your course description"
+          formControlName="courseDescription"
+          id="courseDescription"
+        ></textarea>
+      </div>
+      <div class="col-sm-10">
+        <label class="form-control-label" for="courseAuthor"
+          >Original Author</label
+        >
+
+        <input
+          type="text"
+          id="courseAuthor"
+          class="form-control"
+          placeholder="Enter course author name"
+          formControlName="courseAuthor"
+        />
+      </div>
+      <div class="col-sm-10">
+        <label class="form-control-label" for="courseAuthor"
+          >Upload course Thumbanil</label
+        >
+        <input class="form-control" type="file" id="formFile" />
+      </div>
+    </div>
+    <div formArrayName="items">
+      <div
+        *ngFor="let item of itemForms.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <div class="row g-2 align-items-center">
+          <div class="col">
+            <label class="form-control-label" for="moduleName"
+              >Module Name</label
+            >
+
+            <input
+              type="text"
+              id="moduleName"
+              class="form-control"
+              placeholder="Enter Module Name"
+              formControlName="moduleName"
+            />
+          </div>
+          <div class="col">
+            <label class="form-control-label" for="moduleLink"
+              >Module Link</label
+            >
+            <input
+              type="text"
+              id="moduleLink"
+              class="form-control"
+              placeholder="Enter Module Link"
+              formControlName="moduleLink"
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              class="btn bg-gradient-danger"
+              (click)="deletePhone()"
+            >
+              Delete
+            </button>
+          </div>
         </div>
-    
-        <div formArrayName="phones" class="row">
-    
-            <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">    
-    
-            
-                <div class="input-group col-md-3">
-                    <label class="form-control-label" for="basic-url">Your Email ID</label>
-                      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="area">
-                </div>
-                <div class="input-group col-md-3">
-                    <label class="form-control-label" for="basic-url">Your Email ID</label>
-                    
-                      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="prefix">
-                    
-                </div>
-                <div class="input-group col-md-3">
-                    <label class="form-control-label" for="basic-url">Your Email ID</label>
-                      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="line">
-                </div>
-    
-                <button class="btn btn-danger form-control" color="warn" (click)="deletePhone()">Delete</button>
-    
-            </div>
-    
-        </div>
-    
-        <button class="btn btn-primary form-control" color="primary" (click)="addPhone()">Add Phone Number</button>    
-    </form>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn bg-gradient-primary m-1"
+      (click)="addPhone()"
+    >
+      Add Module
+    </button>
+  </form>
 </div>
 
-
-
-
+<ng-template #userNotLoggedIn>
+  <lottie-player
+    src="https://assets3.lottiefiles.com/packages/lf20_ymbzgxgc.json"
+    background="transparent"
+    class="d-flex mx-auto align-center"
+    speed="2"
+    style="width: 600px; height: 600px"
+    loop
+    autoplay
+  ></lottie-player>
+</ng-template>
