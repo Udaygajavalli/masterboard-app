@@ -1,0 +1,49 @@
+<div class="container centered">
+    <form [formGroup]="myForm">
+
+        Value: {{ myForm.value | json }}
+    
+        <hr>
+    
+    
+        <div class="form-group">
+            <label class="form-control-label" for="basic-url">Your Email ID</label>
+            <div class="input-group">
+              <span class="input-group-text" id="basic-addon3">Email</span>
+              <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="email">
+            </div>
+        </div>
+    
+        <div formArrayName="phones" class="row">
+    
+            <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">    
+    
+            
+                <div class="input-group col-md-3">
+                    <label class="form-control-label" for="basic-url">Your Email ID</label>
+                      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="area">
+                </div>
+                <div class="input-group col-md-3">
+                    <label class="form-control-label" for="basic-url">Your Email ID</label>
+                    
+                      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="prefix">
+                    
+                </div>
+                <div class="input-group col-md-3">
+                    <label class="form-control-label" for="basic-url">Your Email ID</label>
+                      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" formControlName="line">
+                </div>
+    
+                <button class="btn btn-danger form-control" color="warn" (click)="deletePhone()">Delete</button>
+    
+            </div>
+    
+        </div>
+    
+        <button class="btn btn-primary form-control" color="primary" (click)="addPhone()">Add Phone Number</button>    
+    </form>
+</div>
+
+
+
+

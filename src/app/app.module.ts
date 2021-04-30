@@ -16,9 +16,12 @@ import { CardComponent } from './components/card/card.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { NgsRevealModule } from 'ngx-scrollreveal';
 import { BoardComponent } from './components/board/board.component';
+import { CreateCourseComponent } from './components/create-course/create-course.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
-  declarations: [AppComponent, RequestCourseComponent, CardComponent, BoardComponent],
+  declarations: [AppComponent, RequestCourseComponent, CardComponent, BoardComponent, CreateCourseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,11 +33,12 @@ import { BoardComponent } from './components/board/board.component';
     AngularFireStorageModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     NgsRevealModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
   providers: [HttpClientModule],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent,CreateCourseComponent],
 })
 export class AppModule {}
