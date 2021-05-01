@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { FirestoredbService } from 'src/app/services/firestoredb.service';
@@ -37,7 +35,8 @@ export class RequestCourseComponent implements OnInit {
   ngOnInit(): void {}
   courseUrl!: string;
   id!: string;
-
+  playlistItems: any;
+  playlistDetails: any;
   onSubmit(f: NgForm) {
     this.courseUrl = f.value;
     this.courseUrl = JSON.stringify(this.courseUrl);
@@ -50,11 +49,41 @@ export class RequestCourseComponent implements OnInit {
       if (this.courseUrl.includes('playlist?list=')) {
         let regex = /(?<=playlist\?list=)(.*?)(?=(?:\?|$))/g;
         this.id = this.courseUrl.match(regex)![0];
-        this.youtube.getPlaylistItems(this.id).subscribe((data) => {
-          console.log(data);
 
-          // this.fire.addYoutubeCourse(this.id,data);
+        this.youtube.getPlaylistItems(this.id).subscribe((playlist) => {
+          this.playlistItems = playlist.items.map((item: any) => {
+            if(item.snippet.title === "Private video")
+              return null;
+            return {
+              moduleTitle: item.snippet.title,
+              moduleDescription: item.snippet.description,
+              moduleImage: item.snippet.thumbnails.maxres || item.snippet.thumbnails.high,
+              modulePosition: item.snippet.position,
+              videoLink: `https://www.youtube.com/watch?v=${item.contentDetails.videoId}`,
+            };
+          });
+          this.playlistItems = {...this.playlistItems}
+          console.log(this.playlistItems);
+          this.fire.addYoutubeCourse(this.id,this.playlistItems);
         });
+        this.youtube.getPlaylistDetails(this.id).subscribe((playlistDetail) => {
+          this.playlistDetails = playlistDetail.items.map((playlist: any) => {
+            return {
+              courseName: playlist.snippet.title,
+              courseDescription: playlist.snippet.description,
+              authorName: playlist.snippet.channelTitle,
+              courseThumbnail: playlist.snippet.thumbnails.maxres,
+            };
+          });
+          this.playlistDetails = this.playlistDetails[0];
+          this.fire.addYoutubeCourse(this.id,this.playlistDetails);
+
+          console.log(this.playlistDetails);
+        });
+        //  let playlistDetail = playlistDetails![0];
+        // var data = { ...playlistDetails, ...playlistItems };
+        console.log(this.playlistDetails);
+        console.log(this.playlistItems);
         this.toastr.success('Added!');
       }
     } else {

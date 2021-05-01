@@ -19,9 +19,14 @@ import { BoardComponent } from './components/board/board.component';
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
-  declarations: [AppComponent, RequestCourseComponent, CardComponent, BoardComponent, CreateCourseComponent],
+  declarations: [
+    AppComponent,
+    RequestCourseComponent,
+    CardComponent,
+    BoardComponent,
+    CreateCourseComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,7 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
     AngularFireStorageModule,
     FormsModule,
     HttpClientModule,
@@ -39,6 +44,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastrModule.forRoot(),
   ],
   providers: [HttpClientModule],
-  bootstrap: [AppComponent,CreateCourseComponent],
+  bootstrap: [AppComponent, CreateCourseComponent],
 })
 export class AppModule {}

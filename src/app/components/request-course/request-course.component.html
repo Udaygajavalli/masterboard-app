@@ -13,9 +13,19 @@
           type="text"
           name="courseUrl"
           ngModel
+          #courseName="ngModel"
           required
+          minlength="8"
+          [class.is-invalid]="courseName.touched && courseName.invalid"
         />
-        <button type="submit" class="btn bg-gradient-secondary mt-1">
+        <small
+          class="text-danger text-gradient form-text text-muted"
+          *ngIf="courseName.touched && courseName.invalid"
+          >URL is Required</small
+        >
+      </div>
+      <div class="form-group">
+        <button type="submit" [disabled]=" formData.form.invalid" class="btn bg-gradient-secondary mt-1">
           Submit
         </button>
       </div>
