@@ -16,19 +16,15 @@
         <a routerLinkActive="active" [routerLink]="['/requestcourse']">
           📚 Request Course
         </a>
+      </li>
+      <li>
         <a routerLinkActive="active" [routerLink]="['/board']">
           🎯 Your Board
         </a>
       </li>
-
       <li>
         <a data-bs-toggle="modal" data-bs-target="#modal-form"> 💌 Contact </a>
       </li>
-      <!-- <li>
-        <a routerLinkActive="active" [routerLink]="['/createcourse']">
-          🎯 Create Course
-        </a>
-      </li> -->
     </ul>
   </nav>
 
@@ -92,58 +88,56 @@
   </div>
 </div>
 
-<div class="col-md-4">
-  <div
-    class="modal fade"
-    id="modal-form"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="modal-form"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <div class="card card-plain">
-            <div class="card-header pb-0 text-left">
-              <h3 class="font-weight-bolder text-info text-gradient">
-                How can we help?
-              </h3>
-              <p class="mb-0">
-                Enter your message, We will revert you back asap!
-              </p>
-            </div>
-            <div class="card-body">
-              <form role="form text-left">
-                <label>Email</label>
-                <div class="input-group mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Email"
-                    aria-label="Email"
-                    aria-describedby="email-addon"
-                  />
-                </div>
-                <label>Message</label>
-                <div class="input-group mb-3">
-                  <textarea
-                    class="form-control"
-                    aria-label="With textarea"
-                    placeholder="Write your message..."
-                  ></textarea>
-                </div>
+<div
+  class="modal fade"
+  id="modal-form"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modal-form"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="card card-plain">
+          <div class="card-header pb-0 text-left">
+            <h3 class="font-weight-bolder text-info text-gradient">
+              How can we help?
+            </h3>
+            <p class="mb-0">
+              Enter your message, We will revert you back asap!
+            </p>
+          </div>
+          <div class="card-body">
+            <form role="form text-left">
+              <label>Email</label>
+              <div class="input-group mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  aria-label="Email"
+                  aria-describedby="email-addon"
+                />
+              </div>
+              <label>Message</label>
+              <div class="input-group mb-3">
+                <textarea
+                  class="form-control"
+                  aria-label="With textarea"
+                  placeholder="Write your message..."
+                ></textarea>
+              </div>
 
-                <div class="text-center">
-                  <button
-                    type="button"
-                    class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
+              <div class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

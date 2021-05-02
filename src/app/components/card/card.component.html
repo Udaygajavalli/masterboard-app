@@ -1,37 +1,37 @@
-<div class="row row-cols-1 row-cols-md-4 g-4">
-  <div class="card-group" *ngFor="let item of [].constructor(100); let i = index">
+<div class="row row-cols-1 row-cols-md-4 no-gutters">
+  <div *ngFor="let course of courses; let i = index">
     <a
       data-bs-toggle="modal"
       data-bs-target="#exampleModalSignUp"
-      (click)="passtoModal(i)"
+      (click)="openXl(content, course)"
     >
       <div class="card card-plain" ngsReveal>
         <div class="card-image border-radius-lg position-relative">
           <div class="blur-shadow-image">
             <img
               class="img-fluid border-radius-lg move-on-hover"
-              src="https://i.ytimg.com/vi/Stj9I9_Q_6w/maxresdefault.jpg"
+              src="{{ course.courseThumbnail.url }}"
             />
           </div>
         </div>
         <div class="card-body px-0 pt-2">
           <span
             class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2"
-            >{{ i }}</span
+            >{{ course.authorName }}</span
           >
-          <p class="card-title h5 d-block text-darker">Shared Coworking</p>
+          <p class="card-title h5 d-block text-darker">
+            {{ course.courseName }}
+          </p>
           <p class="card-description mb-4">
-            Use border utilities to quickly style the border and border-radius
-            of an element. Great for images, buttons.
+            {{ course.courseDescription | slice: 0:100 }}
           </p>
           <div class="author align-items-center">
             <img
               src="https://i.ytimg.com/vi/Stj9I9_Q_6w/default.jpg"
-              alt="..."
               class="avatar shadow"
             />
             <div class="name ps-3">
-              <span>Mathew Glock</span>
+              <span>{{ course.authorName }}</span>
               <div class="stats">
                 <small>Posted on 28 February</small>
               </div>
@@ -41,97 +41,90 @@
       </div>
     </a>
   </div>
-
-  <div class="col-md-4">
-    <div
-      class="modal fade"
-      id="exampleModalSignUp"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalSignTitle"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-body p-0">
-            <div class="card card-plain">
-              <div class="card-header pb-0 text-left">
-                <h3 class="font-weight-bolder text-primary text-gradient">
-                  Join us today {{ data }}
-                </h3>
-                <p class="mb-0">Enter your email and password to register</p>
-              </div>
-              <div class="card-body pb-3">
-                <form role="form text-left">
-                  <label>Name</label>
-                  <div class="input-group mb-3">
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Name"
-                      aria-label="Name"
-                      aria-describedby="name-addon"
-                    />
-                  </div>
-                  <label>Email</label>
-                  <div class="input-group mb-3">
-                    <input
-                      type="email"
-                      class="form-control"
-                      placeholder="Email"
-                      aria-label="Email"
-                      aria-describedby="email-addon"
-                    />
-                  </div>
-                  <label>Password</label>
-                  <div class="input-group mb-3">
-                    <input
-                      type="password"
-                      class="form-control"
-                      placeholder="Password"
-                      aria-label="Password"
-                      aria-describedby="password-addon"
-                    />
-                  </div>
-                  <div class="form-check form-check-info text-left">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                      checked=""
-                    />
-                    <label class="form-check-label" for="flexCheckDefault">
-                      I agree the
-                      <a href="javascrpt:;" class="text-dark font-weight-bolder"
-                        >Terms and Conditions</a
-                      >
-                    </label>
-                  </div>
-                  <div class="text-center">
-                    <button
-                      type="button"
-                      class="btn bg-gradient-primary btn-lg btn-rounded w-100 mt-4 mb-0"
-                    >
-                      Sign up
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer text-center pt-0 px-sm-4 px-1">
-                <p class="mb-4 mx-auto">
-                  Already have an account?
-                  <a
-                    href="javascrpt:;"
-                    class="text-primary text-gradient font-weight-bold"
-                    >Sign in</a
-                  >
-                </p>
-              </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <div class="card card-plain">
+            <div class="card-header p-0 mx-3 mt-4 position-relative z-index-1">
+              <img
+                src="{{ course.courseThumbnail.url }}"
+                class="img-fluid border-radius-lg"
+              />
             </div>
+
+            <div class="card-body pt-2">
+              <!-- <span
+                class="text-gradient text-primary text-uppercase  font-weight-bold my-2"
+                >House</span
+              > -->
+              <a class="card-title h5 d-block text-darker small">
+                {{ course.courseName }}
+              </a>
+              <p class="card-description mb-2 text-sm">
+                {{ course.courseDescription | slice: 0:200 }}
+              </p>
+              <div class="author align-items-center p-0">
+                <div class="name">
+                  <i class="fas fa-user-shield"></i>
+                  <span> {{ course.authorName }}</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn bg-gradient-info btn-sm w-100 mt-3"
+              >
+                Add to your board
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-8 mt-4">
+          <div class="table-responsive">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th
+                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                  >
+                    Modules
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of course.items">
+                  <td>
+                    <a href="{{ item.videoLink }}" target="_blank">
+                      <div class="d-flex px-2">
+                        <div>
+                          <img
+                            src="{{ item.moduleImage.url }}"
+                            class="avatar avatar-sm rounded-circle me-2"
+                          />
+                        </div>
+                        <div class="my-auto">
+                          <h6 class="mb-0 text-sm">{{ item.moduleTitle }}</h6>
+                        </div>
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

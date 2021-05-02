@@ -3,3 +3,14 @@
 a{
     cursor: pointer;
 }
+.table-responsive {
+    max-height: 520px;
+    overflow: auto;
+}
+
+@media screen {
+    .modal-adaptive .modal-lg {
+        width: 85% !important;
+        max-width: calc(85%);
+    }
+}

@@ -52,7 +52,6 @@ export class CreateCourseComponent implements OnInit {
       moduleName: [],
       moduleLink: [],
     });
-
     this.itemForms.push(item);
   }
   deletePhone(i: any) {

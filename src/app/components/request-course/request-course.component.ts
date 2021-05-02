@@ -52,19 +52,20 @@ export class RequestCourseComponent implements OnInit {
 
         this.youtube.getPlaylistItems(this.id).subscribe((playlist) => {
           this.playlistItems = playlist.items.map((item: any) => {
-            if(item.snippet.title === "Private video")
-              return null;
+            if (item.snippet.title === 'Private video') return null;
             return {
               moduleTitle: item.snippet.title,
               moduleDescription: item.snippet.description,
-              moduleImage: item.snippet.thumbnails.maxres || item.snippet.thumbnails.high,
+              moduleImage:
+                item.snippet.thumbnails.maxres || item.snippet.thumbnails.high,
               modulePosition: item.snippet.position,
               videoLink: `https://www.youtube.com/watch?v=${item.contentDetails.videoId}`,
             };
           });
-          this.playlistItems = {...this.playlistItems}
           console.log(this.playlistItems);
-          this.fire.addYoutubeCourse(this.id,this.playlistItems);
+          this.playlistItems = { items: [...this.playlistItems] };
+          console.log(this.playlistItems);
+          this.fire.addYoutubeCourse(this.id, this.playlistItems);
         });
         this.youtube.getPlaylistDetails(this.id).subscribe((playlistDetail) => {
           this.playlistDetails = playlistDetail.items.map((playlist: any) => {
@@ -76,15 +77,10 @@ export class RequestCourseComponent implements OnInit {
             };
           });
           this.playlistDetails = this.playlistDetails[0];
-          this.fire.addYoutubeCourse(this.id,this.playlistDetails);
-
-          console.log(this.playlistDetails);
+          this.fire.addYoutubeCourse(this.id, this.playlistDetails);
         });
-        //  let playlistDetail = playlistDetails![0];
-        // var data = { ...playlistDetails, ...playlistItems };
-        console.log(this.playlistDetails);
-        console.log(this.playlistItems);
         this.toastr.success('Added!');
+        f.resetForm();
       }
     } else {
       let data = {
@@ -93,17 +89,7 @@ export class RequestCourseComponent implements OnInit {
       };
       this.fire.courseRequests(data);
       this.toastr.error('As of now we only support YouTube Playlists.');
+      f.resetForm();
     }
   }
-  // res: any;
-
-  // getPlaylist(id: string) {
-  //   this.res = this.http.get(
-  //     `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=25&playlistId=${id.slice(
-  //       0,
-  //       -2
-  //     )}f&key=${environment.googleAPI_KEY}`
-  //   );
-  //   console.log(`Heyyy. ${this.res}`);
-  // }
 }

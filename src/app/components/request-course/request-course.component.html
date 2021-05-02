@@ -25,7 +25,11 @@
         >
       </div>
       <div class="form-group">
-        <button type="submit" [disabled]=" formData.form.invalid" class="btn bg-gradient-secondary mt-1">
+        <button
+          type="submit"
+          [disabled]="formData.form.invalid"
+          class="btn bg-gradient-secondary"
+        >
           Submit
         </button>
       </div>
@@ -47,13 +51,7 @@
   </form>
 </div> -->
 <ng-template #userNotLoggedIn>
-  <lottie-player
-    src="https://assets3.lottiefiles.com/packages/lf20_ymbzgxgc.json"
-    background="transparent"
-    class="d-flex mx-auto align-center"
-    speed="2"
-    style="width: 600px; height: 600px"
-    loop
-    autoplay
-  ></lottie-player>
+  <div class="container">
+    <img src="../../../assets/img/sign-up.png" alt="" class="rounded mx-auto d-block img-fluid">
+  </div>
 </ng-template>

@@ -18,6 +18,7 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
 import { BoardComponent } from './components/board/board.component';
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -41,9 +42,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     NgsRevealModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
+    NgbModule,
   ],
   providers: [HttpClientModule],
-  bootstrap: [AppComponent, CreateCourseComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

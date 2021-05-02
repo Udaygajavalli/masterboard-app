@@ -3,7 +3,6 @@ import { AuthService } from './services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,13 +10,14 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'masterboard-app';
-
   user: any;
   constructor(
     private auth: AuthService,
     public toastr: ToastrService,
     private router: Router
   ) {
+    console.log('app-con');
+
     auth.getUser().subscribe(
       (user) => {
         this.user = user;
@@ -27,6 +27,7 @@ export class AppComponent {
       }
     );
   }
+
   loginwithGoogle() {
     this.auth
       .loginwithGoogle()

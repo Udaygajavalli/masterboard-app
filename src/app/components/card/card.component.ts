@@ -1,24 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class CardComponent implements OnInit {
-  constructor() {}
+export class CardComponent implements OnDestroy {
+  courses: any;
+  dataFromDB: any;
 
-  ngOnInit(): void {}
-  HEROES = [
-    { id: 1, name: 'Superman' },
-    { id: 2, name: 'Batman' },
-    { id: 5, name: 'BatGirl' },
-    { id: 3, name: 'Robin' },
-    { id: 4, name: 'Flash' },
-  ];
-  data: any;
+  constructor(private db: AngularFirestore, private modalService: NgbModal) {
+    this.dataFromDB = this.db
+      .collection('courses')
+      .valueChanges()
+      .subscribe((val) => {
+        this.courses = val;
+        console.log(val);
+      });
+  }
+  course: any;
 
-  passtoModal(data: any) {
-    this.data = data;
+  openXl(targetModal: any, course: any) {
+    this.course = course;
+    console.log(this.course);
+    this.modalService.open(targetModal, {
+      size: 'lg',
+      windowClass: 'modal-adaptive',
+    });
+  }
+  ngOnDestroy(): void {
+    console.log('Done');
+    this.dataFromDB.unsubscribe();
   }
 }
