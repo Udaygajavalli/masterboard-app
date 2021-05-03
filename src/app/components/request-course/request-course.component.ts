@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { YoutubeService } from 'src/app/services/youtube.service';
 import { FirestoredbService } from 'src/app/services/firestoredb.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request-course',
@@ -16,7 +17,8 @@ export class RequestCourseComponent implements OnInit {
     private toastr: ToastrService,
     private youtube: YoutubeService,
     private fire: FirestoredbService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.auth.getUser().subscribe(
       (user) => {
@@ -80,6 +82,8 @@ export class RequestCourseComponent implements OnInit {
           this.fire.addYoutubeCourse(this.id, this.playlistDetails);
         });
         this.toastr.success('Added!');
+        this.router.navigateByUrl('');
+
         f.resetForm();
       }
     } else {

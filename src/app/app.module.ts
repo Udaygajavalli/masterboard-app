@@ -19,6 +19,8 @@ import { BoardComponent } from './components/board/board.component';
 import { CreateCourseComponent } from './components/create-course/create-course.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
     NgbModule,
+    Ng2SearchPipeModule,
+    DragDropModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

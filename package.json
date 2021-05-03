@@ -28,6 +28,7 @@
     "firebase": "^8.4.2",
     "mdb-angular-ui-kit": "^1.0.0-beta3",
     "mini-css-extract-plugin": "^1.2.1",
+    "ng2-search-filter": "^0.5.1",
     "ngx-scrollreveal": "^3.0.0",
     "ngx-toastr": "^13.2.1",
     "notyf": "^3.9.0",

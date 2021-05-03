@@ -1,5 +1,18 @@
+<div class="form-group mt-0">
+  <div class="input-group mb-4">
+    <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+    <input
+      class="form-control form-control-lg"
+      placeholder="Search"
+      type="text"
+      name="searchString"
+      [(ngModel)]="searchString"
+      (ngModelChange)="Search()"
+    />
+  </div>
+</div>
 <div class="row row-cols-1 row-cols-md-4 no-gutters">
-  <div *ngFor="let course of courses; let i = index">
+  <div *ngFor="let course of courses | filter: searchString">
     <a
       data-bs-toggle="modal"
       data-bs-target="#exampleModalSignUp"
@@ -15,6 +28,8 @@
           </div>
         </div>
         <div class="card-body px-0 pt-2">
+          <i class="fas fa-user-shield mr-1"></i>
+
           <span
             class="text-gradient text-primary text-uppercase text-xs font-weight-bold my-2"
             >{{ course.authorName }}</span
@@ -22,21 +37,18 @@
           <p class="card-title h5 d-block text-darker">
             {{ course.courseName }}
           </p>
-          <p class="card-description mb-4">
-            {{ course.courseDescription | slice: 0:100 }}
+          <p class="card-description mb-1">
+            {{ course.courseDescription | slice: 0:100 }}...
           </p>
-          <div class="author align-items-center">
-            <img
-              src="https://i.ytimg.com/vi/Stj9I9_Q_6w/default.jpg"
-              class="avatar shadow"
-            />
-            <div class="name ps-3">
+          <!-- <div class="author">
+            <div class="name">
+              <i class="fas fa-user-shield"></i>
               <span>{{ course.authorName }}</span>
               <div class="stats">
                 <small>Posted on 28 February</small>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </a>
@@ -46,7 +58,7 @@
   <div class="modal-body">
     <div class="container">
       <div class="row">
-        <div class="col-4">
+        <div class="col col-md-4">
           <div class="card card-plain">
             <div class="card-header p-0 mx-3 mt-4 position-relative z-index-1">
               <img
@@ -64,11 +76,11 @@
                 {{ course.courseName }}
               </a>
               <p class="card-description mb-2 text-sm">
-                {{ course.courseDescription | slice: 0:200 }}
+                {{ course.courseDescription | slice: 0:200 }}...
               </p>
               <div class="author align-items-center p-0">
                 <div class="name">
-                  <i class="fas fa-user-shield"></i>
+                  <i class="fas fa-user-shield mr-1"></i>
                   <span> {{ course.authorName }}</span>
                 </div>
               </div>
@@ -81,7 +93,7 @@
             </div>
           </div>
         </div>
-        <div class="col-8 mt-4">
+        <div class="col col-md-8 mt-4">
           <div class="table-responsive">
             <table class="table align-items-center mb-0">
               <thead>

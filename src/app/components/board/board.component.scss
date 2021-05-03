@@ -1,0 +1,26 @@
+@import "../../../assets/css/soft-design-system.min";
+@import "../../../assets/css/nucleo-icons.css";
+
+
+
+  .status-green {
+    width: 30px;
+    height: 8px;
+    border-radius: 10px;
+    background: #23d2ac;
+    margin-bottom: 1px; 
+  }
+  .status-blue {
+    width: 30px;
+    height: 8px;
+    border-radius: 10px;
+    background: #33adff;
+    margin-bottom: 1px;  
+  }
+  .status-red {
+    width: 30px;
+    height: 8px;
+    border-radius: 10px;
+    background: red;
+    margin-bottom: 1px; 
+  }
