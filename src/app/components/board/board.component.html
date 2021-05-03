@@ -1,17 +1,21 @@
 <div *ngIf="user; else userNotLoggedIn">
   <div class="container">
-    <div class="row align-items-start">
-      <div class="col-sm border-radius-lg bg-light mr-1">
+    <div class="row align-items-start" cdkDropListGroup>
+      <div
+        class="col-sm border-radius-lg bg-light mr-1"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        (cdkDropListDropped)="drop($event)"
+      >
         <h6 class="card-title text-uppercase text-truncate pl-2 pt-3">
           <div class="status-red"></div>
           To Do
         </h6>
-        <div class="card mb-3" cdkDrag>
+        <div class="card mb-3" *ngFor="let item of todo" cdkDrag>
           <div class="card-body p-3 mb-0">
-            <h5 class="mb-0">Module Name</h5>
-            <p class="text-muted small">
-              Module Description
-            </p>
+            <h5 class="mb-0">{{ item }}</h5>
+            <p class="text-muted small">Module Description</p>
             <div class="author align-items-center">
               <img
                 src="../../../assets/img/sign-up.png"
@@ -21,49 +25,31 @@
               <div class="name ps-3">
                 <span>Course Name</span>
                 <div class="stats">
-                  <small><i class="fas fa-user-shield mr-1"></i>
-                    <span> Author Name</span></small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-3">
-          <div class="card-body p-3 mb-0">
-            <h5 class="mb-0">Module Name</h5>
-            <p class="text-muted small">
-              Module Description
-            </p>
-            <div class="author align-items-center">
-              <img
-                src="../../../assets/img/sign-up.png"
-                alt="..."
-                class="avatar rounded-circle"
-              />
-              <div class="name ps-3">
-                <span>Course Name</span>
-                <div class="stats">
-                  <small><i class="fas fa-user-shield mr-1"></i>
-                    <span> Author Name</span></small>
+                  <small
+                    ><i class="fas fa-user-shield mr-1"></i>
+                    <span> Author Name</span></small
+                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm border-radius-lg bg-light ml-1 mr-1">
+      <div
+        class="col-sm border-radius-lg bg-light ml-1 mr-1"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="doing"
+        (cdkDropListDropped)="drop($event)"
+      >
         <h6 class="card-title text-uppercase text-truncate pl-2 pt-3">
           <div class="status-blue"></div>
           Doing
         </h6>
-
-        <div class="card mb-3">
+        <div class="card mb-3" *ngFor="let item of doing" cdkDrag>
           <div class="card-body p-3 mb-0">
-            <h5 class="mb-0">Module Name</h5>
-            <p class="text-muted small">
-              Module Description
-            </p>
+            <h5 class="mb-0">{{ item }}</h5>
+            <p class="text-muted small">Module Description</p>
             <div class="author align-items-center">
               <img
                 src="../../../assets/img/sign-up.png"
@@ -73,26 +59,31 @@
               <div class="name ps-3">
                 <span>Course Name</span>
                 <div class="stats">
-                  <small><i class="fas fa-user-shield mr-1"></i>
-                    <span> Author Name</span></small>
+                  <small
+                    ><i class="fas fa-user-shield mr-1"></i>
+                    <span> Author Name</span></small
+                  >
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm border-radius-lg bg-light ml-1">
+      <div
+        class="col-sm border-radius-lg bg-light ml-1"
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="done"
+        (cdkDropListDropped)="drop($event)"
+      >
         <h6 class="card-title text-uppercase text-truncate pl-2 pt-3">
           <div class="status-green"></div>
           Done
         </h6>
-
-        <div class="card mb-3">
+        <div class="card mb-3" *ngFor="let item of done" cdkDrag>
           <div class="card-body p-3 mb-0">
-            <h5 class="mb-0">Module Name</h5>
-            <p class="text-muted small">
-              Module Description
-            </p>
+            <h5 class="mb-0">{{ item }}</h5>
+            <p class="text-muted small">Module Description</p>
             <div class="author align-items-center">
               <img
                 src="../../../assets/img/sign-up.png"
@@ -102,8 +93,10 @@
               <div class="name ps-3">
                 <span>Course Name</span>
                 <div class="stats">
-                  <small><i class="fas fa-user-shield mr-1"></i>
-                    <span> Author Name</span></small>
+                  <small
+                    ><i class="fas fa-user-shield mr-1"></i>
+                    <span> Author Name</span></small
+                  >
                 </div>
               </div>
             </div>
