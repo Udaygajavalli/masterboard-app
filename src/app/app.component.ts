@@ -44,7 +44,7 @@ export class AppComponent {
   async logOut() {
     try {
       await this.auth.logOut();
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/');
       this.toastr.info('See you again!');
     } catch (err) {
       this.toastr.error(err.message);
