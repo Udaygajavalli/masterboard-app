@@ -14,6 +14,8 @@
         </h6>
         <div *ngFor="let task of tasks.todo" cdkDrag>
           <a
+            href="{{ task.videoLink }}"
+            target="_blank"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-container="body"
@@ -60,6 +62,8 @@
         </h6>
         <div *ngFor="let task of tasks.doing" cdkDrag>
           <a
+            href="{{ task.videoLink }}"
+            target="_blank"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-container="body"
@@ -106,6 +110,8 @@
         </h6>
         <div *ngFor="let task of tasks.done" cdkDrag>
           <a
+            href="{{ task.videoLink }}"
+            target="_blank"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-container="body"
