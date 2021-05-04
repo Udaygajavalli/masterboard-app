@@ -5,6 +5,7 @@ import { YoutubeService } from 'src/app/services/youtube.service';
 import { FirestoredbService } from 'src/app/services/firestoredb.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-request-course',
@@ -51,11 +52,13 @@ export class RequestCourseComponent implements OnInit {
       if (this.courseUrl.includes('playlist?list=')) {
         let regex = /(?<=playlist\?list=)(.*?)(?=(?:\?|$))/g;
         this.id = this.courseUrl.match(regex)![0];
+        this.id = this.id.slice(0, -2);
 
         this.youtube.getPlaylistItems(this.id).subscribe((playlist) => {
           this.playlistItems = playlist.items.map((item: any) => {
             if (item.snippet.title === 'Private video') return null;
             return {
+              moduleId: uuidv4(),
               moduleTitle: item.snippet.title,
               moduleDescription: item.snippet.description,
               moduleImage:
@@ -72,6 +75,7 @@ export class RequestCourseComponent implements OnInit {
         this.youtube.getPlaylistDetails(this.id).subscribe((playlistDetail) => {
           this.playlistDetails = playlistDetail.items.map((playlist: any) => {
             return {
+              courseId: this.id,
               courseName: playlist.snippet.title,
               courseDescription: playlist.snippet.description,
               authorName: playlist.snippet.channelTitle,

@@ -1,24 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
+
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
   user: any;
-  constructor(private toastr: ToastrService, private auth: AuthService) {
+  tasks: any;
+  userid: any;
+  fs: any;
+  constructor(
+    private toastr: ToastrService,
+    public auth: AuthService,
+    private db: AngularFirestore
+  ) {
     this.auth.getUser().subscribe(
       (user) => {
         if (user) {
           this.user = user;
+          localStorage.setItem('userid', user.uid);
         } else {
           this.toastr.warning('Please sign in to access this page.');
         }
@@ -29,7 +39,17 @@ export class BoardComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userid = localStorage.getItem('userid');
+    this.fs = this.db
+      .collection(`userCourses`)
+      .doc(this.userid)
+      .valueChanges()
+      .subscribe((val) => {
+        this.tasks = val;
+        console.log(this.tasks);
+      });
+  }
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
@@ -56,6 +76,17 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      console.log(this.tasks.todo);
+      console.log(this.tasks.doing);
+      console.log(this.tasks.done);
+      this.db
+        .collection('userCourses')
+        .doc(this.userid)
+        .set(this.tasks, { merge: true });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.fs.unsubscribe();
   }
 }
