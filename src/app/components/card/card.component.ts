@@ -55,11 +55,6 @@ export class CardComponent implements OnDestroy, OnInit {
   }
   addCourse() {
     if (this.user != null) {
-      // let data = {
-      //   todo: [...this.course.items],
-      //   doing: [],
-      //   done: [],
-      // };
       this.firestore.addCourseIntoUserDb(this.user.uid, this.course.items);
       this.toastr.success('Course Added Successfully');
       this.modalService.dismissAll();

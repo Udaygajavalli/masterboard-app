@@ -40,6 +40,9 @@ export class RequestCourseComponent implements OnInit {
   id!: string;
   playlistItems: any;
   playlistDetails: any;
+  courseId: any;
+  courseName: any;
+  authorName: any;
   onSubmit(f: NgForm) {
     this.courseUrl = f.value;
     this.courseUrl = JSON.stringify(this.courseUrl);
@@ -53,11 +56,29 @@ export class RequestCourseComponent implements OnInit {
         let regex = /(?<=playlist\?list=)(.*?)(?=(?:\?|$))/g;
         this.id = this.courseUrl.match(regex)![0];
         this.id = this.id.slice(0, -2);
-
+        this.youtube.getPlaylistDetails(this.id).subscribe((playlistDetail) => {
+          this.playlistDetails = playlistDetail.items.map((playlist: any) => {
+            this.courseId = this.id;
+            this.courseName = playlist.snippet.title;
+            this.authorName = playlist.snippet.channelTitle;
+            return {
+              courseId: this.id,
+              courseName: playlist.snippet.title,
+              authorName: playlist.snippet.channelTitle,
+              courseDescription: playlist.snippet.description,
+              courseThumbnail: playlist.snippet.thumbnails.maxres,
+            };
+          });
+          this.playlistDetails = this.playlistDetails[0];
+          this.fire.addYoutubeCourse(this.id, this.playlistDetails);
+        });
         this.youtube.getPlaylistItems(this.id).subscribe((playlist) => {
           this.playlistItems = playlist.items.map((item: any) => {
             if (item.snippet.title === 'Private video') return null;
             return {
+              courseId: this.courseId,
+              courseName: this.courseName,
+              authorName: this.authorName,
               moduleId: uuidv4(),
               moduleTitle: item.snippet.title,
               moduleDescription: item.snippet.description,
@@ -67,24 +88,10 @@ export class RequestCourseComponent implements OnInit {
               videoLink: `https://www.youtube.com/watch?v=${item.contentDetails.videoId}`,
             };
           });
-          console.log(this.playlistItems);
           this.playlistItems = { items: [...this.playlistItems] };
-          console.log(this.playlistItems);
           this.fire.addYoutubeCourse(this.id, this.playlistItems);
         });
-        this.youtube.getPlaylistDetails(this.id).subscribe((playlistDetail) => {
-          this.playlistDetails = playlistDetail.items.map((playlist: any) => {
-            return {
-              courseId: this.id,
-              courseName: playlist.snippet.title,
-              courseDescription: playlist.snippet.description,
-              authorName: playlist.snippet.channelTitle,
-              courseThumbnail: playlist.snippet.thumbnails.maxres,
-            };
-          });
-          this.playlistDetails = this.playlistDetails[0];
-          this.fire.addYoutubeCourse(this.id, this.playlistDetails);
-        });
+
         this.toastr.success('Added!');
         this.router.navigateByUrl('');
 
