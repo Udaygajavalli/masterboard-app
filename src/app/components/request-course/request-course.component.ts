@@ -79,7 +79,7 @@ export class RequestCourseComponent implements OnInit {
               courseId: this.courseId,
               courseName: this.courseName,
               authorName: this.authorName,
-              moduleId: uuidv4(),
+              moduleId: item.contentDetails.videoId,
               moduleTitle: item.snippet.title,
               moduleDescription: item.snippet.description,
               moduleImage:
