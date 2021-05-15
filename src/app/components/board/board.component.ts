@@ -16,7 +16,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class BoardComponent implements OnInit, OnDestroy {
   user: any;
-  tasks: any;
+  tasks: any = null;
   userid: any;
   fs: any;
   constructor(
@@ -41,26 +41,17 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userid = localStorage.getItem('userid');
-    this.fs = this.db
-      .collection(`userCourses`)
-      .doc(this.userid)
-      .valueChanges()
-      .subscribe((val) => {
-        this.tasks = val;
-        console.log(this.tasks);
-      });
+    if (this.userid) {
+      this.fs = this.db
+        .collection(`userCourses`)
+        .doc(this.userid)
+        .valueChanges()
+        .subscribe((val) => {
+          this.tasks = val;
+          console.log(this.tasks);
+        });
+    }
   }
-
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
-  doing = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog',
-  ];
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

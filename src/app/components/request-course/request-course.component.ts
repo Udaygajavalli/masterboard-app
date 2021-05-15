@@ -66,7 +66,7 @@ export class RequestCourseComponent implements OnInit {
               courseName: playlist.snippet.title,
               authorName: playlist.snippet.channelTitle,
               courseDescription: playlist.snippet.description,
-              courseThumbnail: playlist.snippet.thumbnails.maxres,
+              courseThumbnail: playlist.snippet.thumbnails.maxres || playlist.snippet.thumbnails.high || playlist.snippet.thumbnails.default,
             };
           });
           this.playlistDetails = this.playlistDetails[0];
@@ -83,7 +83,7 @@ export class RequestCourseComponent implements OnInit {
               moduleTitle: item.snippet.title,
               moduleDescription: item.snippet.description,
               moduleImage:
-                item.snippet.thumbnails.maxres || item.snippet.thumbnails.high,
+                item.snippet.thumbnails.maxres || item.snippet.thumbnails.high || playlist.snippet.thumbnails.default,
               modulePosition: item.snippet.position,
               videoLink: `https://www.youtube.com/watch?v=${item.contentDetails.videoId}`,
             };

@@ -12,6 +12,22 @@
           <div class="status-red"></div>
           To Do
         </h6>
+        <div class="card mb-3" *ngIf="tasks.todo.length == 0 ">
+          <div class="card-body p-3 mb-0">
+            <h6 class="mb-0">Add a course to start learning!</h6>
+            <p class="text-muted small mb-0">
+              You may add any course available or else request a new course with URL. We will notify you back once when it is available.
+            </p>
+            <div class="author align-items-center">
+
+              <div class="name">
+                <i class="fas fa-user-shield mr-1"></i>
+                <span>Admin</span>
+                
+              </div>
+            </div>
+          </div>
+        </div>
         <div *ngFor="let task of tasks.todo" cdkDrag>
           <a
             href="{{ task.videoLink }}"
